@@ -53,41 +53,20 @@ async function teardown() {
     });
 }
 
-async function getItems() {
+async function getPostits() {
     return new Promise((acc, rej) => {
         pool.query('SELECT * FROM postits', (err, rows) => {
             if (err) return rej(err);
             acc(rows);
-            //     rows.map(item =>
-            //         Object.assign({}, item, {
-            //             completed: item.completed === 1,
-            //         }),
-            //     ),
-            // );
         });
     });
 }
 
-// async function getItem(id) {
-//     return new Promise((acc, rej) => {
-//         pool.query('SELECT * FROM todo_items WHERE id=?', [id], (err, rows) => {
-//             if (err) return rej(err);
-//             acc(
-//                 rows.map(item =>
-//                     Object.assign({}, item, {
-//                         completed: item.completed === 1,
-//                     }),
-//                 )[0],
-//             );
-//         });
-//     });
-// }
-
-async function storeItem(item) {
+async function storePostit(postit) {
     return new Promise((acc, rej) => {
         pool.query(
             'INSERT INTO postits (id, value) VALUES (?, ?)',
-            [item.id, item.value],
+            [postit.id, postit.value],
             err => {
                 if (err) return rej(err);
                 acc();
@@ -100,7 +79,6 @@ async function storeItem(item) {
 module.exports = {
     init,
     teardown,
-    getItems,
-    // getItem,
-    storeItem
+    getPostits,
+    storePostit
 };

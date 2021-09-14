@@ -33,6 +33,10 @@
     <label class="publish">Publish</button>
 </div>
 
+<div class="postits">
+
+</div>
+
 <script>
     document.querySelector(".publish").addEventListener("click", async (e) =>  {        
         console.log(document.querySelector(".postit").value);
@@ -51,8 +55,10 @@
     })
 
     function showPostits(postits){
+        document.querySelector(".postits").innerHTML = "";             
+
         postits.map(postit => {
-            console.log(postit);
+            document.querySelector(".postits").innerHTML +=  "<div class='postit'>" + postit.value + "</div>";
         })
     }
 </script>

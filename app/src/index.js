@@ -7,19 +7,18 @@ app.use(require('body-parser').json());
 app.use(express.static(__dirname + '/static'));
 
 app.get('/postits', async (req, res) => {
-    const items = await db.getItems();
-    res.send(items);
+    const postits = await db.getPostit();
+    res.send(postits);
 });
 
 app.post('/postits', async (req, res) => {
-    const item = {
+    const postit = {
         id: uuid(),
-        name: req.body.name,
-        completed: false,
+        value: req.body.value,
     };
 
-    await db.storeItem(item);
-    res.send(item);
+    await db.storePostit(postit);
+    res.send(postit);
 });
 
 
