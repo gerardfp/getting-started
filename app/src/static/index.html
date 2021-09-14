@@ -39,18 +39,14 @@
 
         let newPostitValue = document.querySelector(".postit").value;
 
-        await fetch('/postits', {
+        fetch('/postits', {
             method: 'POST',
             body: JSON.stringify({ name: newPostitValue }),
             headers: { 'Content-Type': 'application/json' },
         });
 
-        let items = await fetch("/postits");
-
-        console.log(items);
-
-        items.map(item => {
-            console.log(item);
-        })
+        fetch('/items')
+            .then(r => r.json())
+            .then(items => console.log(items));
     })
 </script>
