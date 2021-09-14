@@ -46,11 +46,7 @@
         });
 
         fetch('/postits')
-            .then(r => {
-                console.log("ayy");
-                console.log(r);
-                r.json();
-            })
+            .then(r => r.json())
             .then(items => console.log(items));
     })
 </script>
