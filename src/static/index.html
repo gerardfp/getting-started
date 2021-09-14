@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<head></head>
+<style>
+    * {
+        box-sizing: border-box;
+        font-size: 1rem;
+    }
+    body {
+        background-color: #f4f4f4;
+        font-family: sans-serif;
+    }
+    .form {
+        display: flex;
+    }
+    .postit {
+        padding: .375rem .75rem;
+        color: #495057;
+        border: 1px solid #ced4da;
+        border-right: 0;
+        border-radius: .25rem 0 0 .25rem;
+    }
+
+    .publish {
+        color: #ffF;
+        background-color: #28a745;
+        border: 1px solid #28a745;
+        border-radius: 0 .25rem .25rem 0;
+        padding: .375rem .75rem;
+    }
+</style>
+<div class="form">
+    <input class="postit" placeholder="New postit" type="text">
+    <label class="publish">Publish</button>
+</div>
+
+<script>
+    document.querySelector(".publish").addEventListener("click", (e) => {        
+        console.log(document.querySelector(".postit").value);
+
+        let newPostitValue = document.querySelector(".postit").value;
+
+        await fetch('/postits', {
+            method: 'POST',
+            body: JSON.stringify({ name: newPostitValue }),
+            headers: { 'Content-Type': 'application/json' },
+        });
+
+        let items = await fetch("/items");
+
+        items.map(item => {
+            console.log(item);
+        })
+    })
+</script>

@@ -96,34 +96,11 @@ async function storeItem(item) {
     });
 }
 
-async function updateItem(id, item) {
-    return new Promise((acc, rej) => {
-        pool.query(
-            'UPDATE todo_items SET name=?, completed=? WHERE id=?',
-            [item.name, item.completed ? 1 : 0, id],
-            err => {
-                if (err) return rej(err);
-                acc();
-            },
-        );
-    });
-}
-
-async function removeItem(id) {
-    return new Promise((acc, rej) => {
-        pool.query('DELETE FROM todo_items WHERE id = ?', [id], err => {
-            if (err) return rej(err);
-            acc();
-        });
-    });
-}
 
 module.exports = {
     init,
     teardown,
     getItems,
     getItem,
-    storeItem,
-    updateItem,
-    removeItem,
+    storeItem
 };

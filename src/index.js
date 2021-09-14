@@ -1,18 +1,26 @@
 const express = require('express');
 const app = express();
-const db = require('./persistence');
-const getItems = require('./routes/getItems');
-const addItem = require('./routes/addItem');
-const updateItem = require('./routes/updateItem');
-const deleteItem = require('./routes/deleteItem');
+const db = require('./mysql');
 
 app.use(require('body-parser').json());
 app.use(express.static(__dirname + '/static'));
 
-app.get('/items', getItems);
-app.post('/items', addItem);
-app.put('/items/:id', updateItem);
-app.delete('/items/:id', deleteItem);
+app.get('/postits', async (req, res) => {
+    const items = await db.getItems();
+    res.send(items);
+});
+
+app.post('/postits', async (req, res) => {
+    const item = {
+        id: uuid(),
+        name: req.body.name,
+        completed: false,
+    };
+
+    await db.storeItem(item);
+    res.send(item);
+});
+
 
 db.init().then(() => {
     app.listen(3000, () => console.log('Listening on port 3000'));
