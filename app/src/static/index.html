@@ -46,7 +46,10 @@
         });
 
         fetch('/items')
-            .then(r => r.json())
+            .then(r => {
+                console.log(r);
+                r.json();
+            })
             .then(items => console.log(items));
     })
 </script>
