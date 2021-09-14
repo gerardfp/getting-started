@@ -45,7 +45,9 @@
             headers: { 'Content-Type': 'application/json' },
         });
 
-        let items = await fetch("/items");
+        let items = await fetch("/postits");
+
+        console.log(items);
 
         items.map(item => {
             console.log(item);
