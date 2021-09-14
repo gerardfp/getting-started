@@ -58,6 +58,7 @@
         document.querySelector(".postits").innerHTML = "";             
 
         postits.map(postit => {
+            console.log(postit);
             document.querySelector(".postits").innerHTML +=  "<div class='postit'>" + postit.value + "</div>";
         })
     }
