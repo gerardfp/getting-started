@@ -41,12 +41,18 @@
 
         fetch('/postits', {
             method: 'POST',
-            body: JSON.stringify({ name: newPostitValue }),
+            body: JSON.stringify({ value: newPostitValue }),
             headers: { 'Content-Type': 'application/json' },
         });
 
         fetch('/postits')
             .then(r => r.json())
-            .then(items => console.log(items));
+            .then(showPostits);
     })
+
+    function showPostits(postits){
+        postits.map(postit => {
+            console.log(postit);
+        })
+    }
 </script>

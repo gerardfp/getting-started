@@ -33,7 +33,7 @@ async function init() {
 
     return new Promise((acc, rej) => {
         pool.query(
-            'CREATE TABLE IF NOT EXISTS todo_items (id varchar(36), name varchar(255), completed boolean)',
+            'CREATE TABLE IF NOT EXISTS postits (id varchar(36), value varchar(255))',
             err => {
                 if (err) return rej(err);
 
@@ -55,39 +55,39 @@ async function teardown() {
 
 async function getItems() {
     return new Promise((acc, rej) => {
-        pool.query('SELECT * FROM todo_items', (err, rows) => {
+        pool.query('SELECT * FROM postits', (err, rows) => {
             if (err) return rej(err);
-            acc(
-                rows.map(item =>
-                    Object.assign({}, item, {
-                        completed: item.completed === 1,
-                    }),
-                ),
-            );
+            acc(rows);
+            //     rows.map(item =>
+            //         Object.assign({}, item, {
+            //             completed: item.completed === 1,
+            //         }),
+            //     ),
+            // );
         });
     });
 }
 
-async function getItem(id) {
-    return new Promise((acc, rej) => {
-        pool.query('SELECT * FROM todo_items WHERE id=?', [id], (err, rows) => {
-            if (err) return rej(err);
-            acc(
-                rows.map(item =>
-                    Object.assign({}, item, {
-                        completed: item.completed === 1,
-                    }),
-                )[0],
-            );
-        });
-    });
-}
+// async function getItem(id) {
+//     return new Promise((acc, rej) => {
+//         pool.query('SELECT * FROM todo_items WHERE id=?', [id], (err, rows) => {
+//             if (err) return rej(err);
+//             acc(
+//                 rows.map(item =>
+//                     Object.assign({}, item, {
+//                         completed: item.completed === 1,
+//                     }),
+//                 )[0],
+//             );
+//         });
+//     });
+// }
 
 async function storeItem(item) {
     return new Promise((acc, rej) => {
         pool.query(
-            'INSERT INTO todo_items (id, name, completed) VALUES (?, ?, ?)',
-            [item.id, item.name, item.completed ? 1 : 0],
+            'INSERT INTO postits (id, value) VALUES (?, ?)',
+            [item.id, item.value],
             err => {
                 if (err) return rej(err);
                 acc();
@@ -101,6 +101,6 @@ module.exports = {
     init,
     teardown,
     getItems,
-    getItem,
+    // getItem,
     storeItem
 };
