@@ -54,7 +54,7 @@
 
     let ps = [{v: "1a"}, {v: "2b"}, {v: "3c"}];
 
-    var tot = ps.reduce((acc, p) => acc + p.v );
+    var tot = ps.reduce((acc, p) => acc + p.v, "" );
 
     console.log(tot);
 
@@ -77,7 +77,7 @@
         fetch('/postits')
             .then(r => r.json())
             .then(postits => {
-                document.querySelector(".postits").innerHTML = postits.reduce((acc, postit) => acc + "<div class='postit'>" + postit.value + "</div>");             
+                document.querySelector(".postits").innerHTML = postits.reduce((acc, postit) => acc + "<div class='postit'>" + postit.value + "</div>", "");             
 
                 // postits.map(postit => {
                 //     document.querySelector(".postits").innerHTML +=  "<div class='postit'>" + postit.value + "</div>";
