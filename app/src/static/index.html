@@ -1,19 +1,14 @@
 <!DOCTYPE html>
 <head></head>
 <style>
-    * {
-        box-sizing: border-box;
-        font-size: 1rem;
-    }
+    * { box-sizing: border-box; }
     
     body {
         background-color: #f4f4f4;
         font-family: sans-serif;
     }
     
-    .form {
-        display: flex;
-    }
+    .form { display: flex; }
 
     .newpostit {
         padding: .375rem .75rem;
@@ -59,6 +54,8 @@
 
     function sendPostit(){
         let newPostitValue = document.querySelector(".newpostit").value;
+
+        document.querySelector(".newpostit").value = "";
 
         fetch('/postits', {
             method: 'POST',

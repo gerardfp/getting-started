@@ -7,18 +7,14 @@ app.use(require('body-parser').json());
 app.use(express.static(__dirname + '/static'));
 
 app.get('/postits', async (req, res) => {
-    const postits = await db.getPostits();
-    res.send(postits);
+    res.send(await db.getPostits());
 });
 
-app.post('/postits', async (req, res) => {
-    const postit = {
+app.post('/postits', (req, res) => {
+    db.storePostit({
         id: uuid(),
         value: req.body.value,
-    };
-
-    await db.storePostit(postit);
-    res.send(postit);
+    });
 });
 
 
@@ -37,4 +33,4 @@ const gracefulShutdown = () => {
 
 process.on('SIGINT', gracefulShutdown);
 process.on('SIGTERM', gracefulShutdown);
-process.on('SIGUSR2', gracefulShutdown); // Sent by nodemon
+process.on('SIGUSR2', gracefulShutdown);
