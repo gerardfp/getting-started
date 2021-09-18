@@ -15,6 +15,7 @@ app.post('/postits', (req, res) => {
         id: uuid(),
         value: req.body.value,
     });
+    res.sendStatus(200);
 });
 
 
