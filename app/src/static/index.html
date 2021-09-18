@@ -48,20 +48,14 @@
     }
 </style>
 <div class="form">
-    <input class="newpostit" placeholder="New postit" type="text">
-    <label class="publish"  onclick="publish()">Publish</label>
+    <input class="newpostit" placeholder="New postit" type="text" onkeyup="event.key === 'Enter' && sendPostit()">
+    <label class="publish"  onclick="sendPostit()">Publish</label>
 </div>
 
-<div class="postits">
-</div>
+<div class="postits"></div>
 
 <script>
     showPostits();
-
-    function publish(){
-        sendPostit();
-        // showPostits();
-    }
 
     function sendPostit(){
         let newPostitValue = document.querySelector(".newpostit").value;
@@ -81,7 +75,6 @@
                 document.querySelector(".postits").innerHTML = "";             
 
                 postits.map(postit => {
-                    console.log(postit);
                     document.querySelector(".postits").innerHTML +=  "<div class='postit'>" + postit.value + "</div>";
                 })
             });
