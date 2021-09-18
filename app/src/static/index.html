@@ -74,13 +74,11 @@
     document.querySelector(".publish").addEventListener("click", (e) =>  {        
         
         sendPostit();
-
         showPostits();
-       
     })
 
     function sendPostit(){
-        let newPostitValue = document.querySelector(".postit").value;
+        let newPostitValue = document.querySelector(".newpostit").value;
 
         fetch('/postits', {
             method: 'POST',
