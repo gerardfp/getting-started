@@ -71,29 +71,36 @@
 </div>
 
 <script>
-    document.querySelector(".publish").addEventListener("click", async (e) =>  {        
-        console.log(document.querySelector(".postit").value);
+    document.querySelector(".publish").addEventListener("click", (e) =>  {        
+        
+        sendPostit();
 
+        showPostits();
+       
+    })
+
+    function sendPostit(){
         let newPostitValue = document.querySelector(".postit").value;
 
         fetch('/postits', {
             method: 'POST',
-            body: JSON.stringify({ value: newPostitValue }),
+            body: JSON.stringify({ value: postit }),
             headers: { 'Content-Type': 'application/json' },
         });
 
+       
+    }
+
+    function showPostits(){
         fetch('/postits')
             .then(r => r.json())
-            .then(showPostits);
-    })
+            .then((postits) => {
+                document.querySelector(".postits").innerHTML = "";             
 
-    function showPostits(postits){
-        console.log("yes");
-        document.querySelector(".postits").innerHTML = "";             
-
-        postits.map(postit => {
-            console.log(postit);
-            document.querySelector(".postits").innerHTML +=  "<div class='postit'>" + postit.value + "</div>";
-        })
+                postits.map(postit => {
+                    console.log(postit);
+                    document.querySelector(".postits").innerHTML +=  "<div class='postit'>" + postit.value + "</div>";
+                })
+            });
     }
 </script>
