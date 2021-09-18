@@ -7,7 +7,7 @@ app.use(require('body-parser').json());
 app.use(express.static(__dirname + '/static'));
 
 app.get('/postits', async (req, res) => {
-    const postits = await db.getPostit();
+    const postits = await db.getPostits();
     res.send(postits);
 });
 
