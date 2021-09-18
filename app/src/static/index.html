@@ -49,33 +49,19 @@
 </style>
 <div class="form">
     <input class="newpostit" placeholder="New postit" type="text">
-    <label class="publish">Publish</label>
+    <label class="publish"  onclick="publish()">Publish</label>
 </div>
 
 <div class="postits">
-    <div class="postit">hello world</div>
-    <div class="postit">hello world</div>
-    <div class="postit">hello world</div>
-    <div class="postit">hello world</div>
-    <div class="postit">hello world</div>
-    <div class="postit">hello world</div>
-    <div class="postit">hello world</div>
-    <div class="postit">hello world</div>
-    <div class="postit">hello world</div>
-    <div class="postit">hello world</div>
-    <div class="postit">hello world</div>
-    <div class="postit">hello world</div>
-    <div class="postit">hello world</div>
-    <div class="postit">hello world</div>
-    <div class="postit">hello world</div>
 </div>
 
 <script>
-    document.querySelector(".publish").addEventListener("click", (e) =>  {        
-        
+    showPostits();
+
+    function publish(){
         sendPostit();
-        showPostits();
-    })
+        // showPostits();
+    }
 
     function sendPostit(){
         let newPostitValue = document.querySelector(".newpostit").value;
@@ -84,15 +70,14 @@
             method: 'POST',
             body: JSON.stringify({ value: newPostitValue }),
             headers: { 'Content-Type': 'application/json' },
-        });
-
-       
+        })
+            .then(showPostits);
     }
 
     function showPostits(){
         fetch('/postits')
             .then(r => r.json())
-            .then((postits) => {
+            .then(postits => {
                 document.querySelector(".postits").innerHTML = "";             
 
                 postits.map(postit => {
