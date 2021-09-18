@@ -10,8 +10,8 @@ app.get('/postits', async (req, res) => {
     res.send(await db.getPostits());
 });
 
-app.post('/postits', (req, res) => {
-    db.storePostit({
+app.post('/postits', async (req, res) => {
+    await db.storePostit({
         id: uuid(),
         value: req.body.value,
     });
