@@ -44,20 +44,13 @@
 </style>
 
 <div class="form">
-    <input class="newpostit" placeholder="New postit" type="text" onkeyup="event.key === 'Enter' && sendPostit()">
-    <label class="publish"  onclick="sendPostit()">Publish</label>
+    <input class="newpostit" placeholder="New post-it" type="text" onkeyup="event.key === 'Enter' && sendPostit()">
+    <label class="publish"  onclick="sendPostit()">Post it!</label>
 </div>
 
 <div class="postits"></div>
 
 <script>
-
-    let ps = [{v: "1a"}, {v: "2b"}, {v: "3c"}];
-
-    var tot = ps.reduce((acc, p) => acc + p.v, "" );
-
-    console.log(tot);
-
     showPostits();
 
     function sendPostit(){
@@ -76,12 +69,6 @@
     function showPostits(){
         fetch('/postits')
             .then(r => r.json())
-            .then(postits => {
-                document.querySelector(".postits").innerHTML = postits.reduce((acc, postit) => acc + "<div class='postit'>" + postit.value + "</div>", "");             
-
-                // postits.map(postit => {
-                //     document.querySelector(".postits").innerHTML +=  "<div class='postit'>" + postit.value + "</div>";
-                // })
-            });
+            .then(postits => document.querySelector(".postits").innerHTML = postits.reduce((acc, postit) => acc + "<div class='postit'>" + postit.value + "</div>", ""));
     }
 </script>
