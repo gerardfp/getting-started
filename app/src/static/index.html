@@ -5,14 +5,17 @@
         box-sizing: border-box;
         font-size: 1rem;
     }
+    
     body {
         background-color: #f4f4f4;
         font-family: sans-serif;
     }
+    
     .form {
         display: flex;
     }
-    .postit {
+
+    .newpostit {
         padding: .375rem .75rem;
         color: #495057;
         border: 1px solid #ced4da;
@@ -27,14 +30,44 @@
         border-radius: 0 .25rem .25rem 0;
         padding: .375rem .75rem;
     }
+
+    .postits {
+        margin-top: 1em;
+        display: flex;
+        gap: 1em;
+        flex-wrap: wrap;
+    }
+
+    .postit {
+        font-family: cursive;
+        background-color: #ffc;
+        box-shadow: 4px 4px 3px #ccc;
+        height: 10em;
+        width: 10em;
+        padding: 1em;
+    }
 </style>
 <div class="form">
-    <input class="postit" placeholder="New postit" type="text">
-    <label class="publish">Publish</button>
+    <input class="newpostit" placeholder="New postit" type="text">
+    <label class="publish">Publish</label>
 </div>
 
 <div class="postits">
-
+    <div class="postit">hello world</div>
+    <div class="postit">hello world</div>
+    <div class="postit">hello world</div>
+    <div class="postit">hello world</div>
+    <div class="postit">hello world</div>
+    <div class="postit">hello world</div>
+    <div class="postit">hello world</div>
+    <div class="postit">hello world</div>
+    <div class="postit">hello world</div>
+    <div class="postit">hello world</div>
+    <div class="postit">hello world</div>
+    <div class="postit">hello world</div>
+    <div class="postit">hello world</div>
+    <div class="postit">hello world</div>
+    <div class="postit">hello world</div>
 </div>
 
 <script>
